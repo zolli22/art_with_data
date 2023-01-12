@@ -1,0 +1,118 @@
+---
+title: "The Art of Data"
+subtitle: "making fun and pretty graphs in RStudio"  
+author: 
+  - "Ingrid Zoll"
+date: 
+  - "January 17 & 19, 2023"
+output:
+  xaringan::moon_reader:
+    css: custom-theme.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: solarized-dark
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_solarized_light()
+```
+
+name: intro
+## Getting Started
+
+- **Welcome!**
+
+- Who am I?
+
+- Who are you?
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+- Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
+
+---
+## Thoughts on Misleading Graphs
+
+> With great power comes great responsibility 
+
+---
+## Some of my inspiration
+
+<iframe width="840" height="472" src="https://www.youtube.com/embed/iqaVe1MCTlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+
+<img src="https://i.redd.it/j6e6aajstfba1.png" alt="Tarantino's Cinematic Network" height="575px" />
+
+[Tarantino's Cinematic Network of Actors](https://www.reddit.com/r/dataisbeautiful/comments/1098bth/oc_tarantinos_cinematic_network_of_actors/)
+---
+class: inverse center middle
+
+# But that's not why we are here today...
+So let's get to it!
+
+---
+
+## Packages
+
+`tidyverse`
+
+```{r}
+# all hail the tidyverse!
+library(tidyverse)
+```
+
+---
+
+## Chart Type Resources
+
+- [The R Graph Gallery](https://r-graph-gallery.com/index.html)
+- [From Data to Viz](https://www.data-to-viz.com/#explore)
+
+---
+class: center, middle
+
+# Thank you!
+
+Questions? Contact me at zolli@reed.edu
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)<br>
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
