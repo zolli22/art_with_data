@@ -1,2 +1,2 @@
-# art_with_data
+# art with data
 Creating Art with Data
