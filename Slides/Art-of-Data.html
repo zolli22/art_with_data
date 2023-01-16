@@ -43,27 +43,28 @@ name: intro
 ---
 ## Disclaimers:
 
-- Most of the graphs shown today will not be informative or helpful.
+- Many of the graphs shown today **will not** be informative or helpful.
 
 ---
 ## Disclaimers:
 
-- Most of the graphs shown today will not be informative or helpful.
+- Many of the graphs shown today **will not** be informative or helpful.
 
-- This class _will not_ teach you how to make informative and helpful graphs.
+- This class **will not** teach you how to make informative and helpful graphs.
 
 ---
 ## Disclaimers:
 
-- Most of the graphs shown today will not be informative or helpful.
+- Many of the graphs shown today **will not** be informative or helpful.
 
-- This class _will not_ teach you how to make informative and helpful graphs.
+- This class **will not** teach you how to make informative and helpful graphs.
 
 - Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
 
 ---
 ## Thoughts on Misleading Graphs
 
+&gt; _With great power comes great responsibility_ 
 
 ---
 ## Some of my inspiration
@@ -75,7 +76,8 @@ name: intro
 &lt;img src="https://i.redd.it/j6e6aajstfba1.png" alt="Tarantino's Cinematic Network" height="575px" /&gt;
 
 [Tarantino's Cinematic Network of Actors](https://www.reddit.com/r/dataisbeautiful/comments/1098bth/oc_tarantinos_cinematic_network_of_actors/)
----
+
+--- 
 class: inverse center middle
 
 # But that's not why we are here today...
@@ -85,13 +87,19 @@ So let's get to it!
 
 ## Packages
 
-`tidyverse`
-
 
 ```r
 # all hail the tidyverse!
 library(tidyverse)
 ```
+
+## How do I find cool R packages?
+
+---
+class: center middle
+
+
+## google it
 
 ---
 
@@ -101,6 +109,121 @@ library(tidyverse)
 - [From Data to Viz](https://www.data-to-viz.com/#explore)
 
 ---
+## Colors
+
+---
+
+## Chord diagram example
+
+.left-column[
+
+```r
+library(circlize)
+```
+]
+
+.right-column[
+&lt;img src="https://pltfrmrsrcscdn.sagepub.com/srm/images/chord-diagram-in-routesonline-2019/10.4135_9781529773996-fig7.jpg" alt="Routes chord diagram" height="500px" /&gt;
+
+[Chord diagram](https://methods.sagepub.com/dataset/chord-diagram-in-routesonline-2019)
+]
+---
+
+&lt;img src="~/Desktop/my brain is noisy/Paideia 2023/Images/chord.gif" alt="Tarantino's Cinematic Network" height="575px" /&gt;
+
+
+&lt;img src="../Images/chord.gif" width="100%" /&gt;
+
+
+
+---
+
+
+### Data
+
+Game of Thrones battle data from [Kaggle](https://www.kaggle.com/mylesoneill/game-of-thrones?select=battles.csv)
+
+
+
+
+```r
+head(got)
+```
+
+```
+## # A tibble: 6 × 25
+##   name      year battl…¹ attac…² defen…³ attac…⁴ attac…⁵ attac…⁶ attac…⁷ defen…⁸
+##   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+## 1 Battle …   298       1 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully  
+## 2 Battle …   298       2 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Barath…
+## 3 Battle …   298       3 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully  
+## 4 Battle …   298       4 Robb S… Joffre… Stark   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Lannis…
+## 5 Battle …   298       5 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis…
+## 6 Battle …   298       6 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis…
+## # … with 15 more variables: defender_2 &lt;chr&gt;, defender_3 &lt;lgl&gt;,
+## #   defender_4 &lt;lgl&gt;, attacker_outcome &lt;chr&gt;, battle_type &lt;chr&gt;,
+## #   major_death &lt;dbl&gt;, major_capture &lt;dbl&gt;, attacker_size &lt;dbl&gt;,
+## #   defender_size &lt;dbl&gt;, attacker_commander &lt;chr&gt;, defender_commander &lt;chr&gt;,
+## #   summer &lt;dbl&gt;, location &lt;chr&gt;, region &lt;chr&gt;, note &lt;chr&gt;, and abbreviated
+## #   variable names ¹​battle_number, ²​attacker_king, ³​defender_king, ⁴​attacker_1,
+## #   ⁵​attacker_2, ⁶​attacker_3, ⁷​attacker_4, ⁸​defender_1
+```
+---
+
+### Graph attempt 1 
+
+
+```r
+chordDiagram(battles)
+```
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+
+---
+
+### Graph attempt 2
+
+
+```r
+chordDiagram(final_houses)
+```
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+
+Filtered so both attacking and defending house are involved in 2 or more battles
+
+---
+
+## Colors
+
+
+
+```r
+library(tvthemes)
+show_col(westeros_pal(palette = "Stark")(6))
+```
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+
+---
+
+## custom color palette
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+
+---
+
+## all together now!
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
+
+---
+
+## game of thrones battles
+
+
+&lt;img src="../Images/got_battle.jpeg" width="100%" /&gt;
+
+---
+
 class: center, middle
 
 # Thank you!
