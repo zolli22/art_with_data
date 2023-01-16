@@ -1,0 +1,104 @@
+---
+title: "Code for Paideia Class, 2023"
+author: "Ingrid Zoll"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Installing packages
+
+```{r installing, eval = F}
+install.packages("tidyverse")
+install.packages("easypackages")
+
+library(tidyverse)
+library(easypackages)
+
+install_packages("here", "circlize", "scales", "tvthemes", "remotes", "cowsay",
+                 "palmerpenguins", "ggdark", "ggshadow")
+
+remotes::install_github("gadenbuie/ggpomological")
+remotes::install_github("sharlagelfand/ggcute")
+```
+
+Loading packages
+
+```{r loading, echo=FALSE}
+# organization, base packages
+library(here)
+library(tidyverse)
+
+# data packages
+library(palmerpenguins)
+
+# color/aesthetics packages
+library(scales)
+library(tvthemes)
+library(ggdark)
+library(ggshadow)
+
+# graphing packages
+library(circlize)
+
+
+
+
+# other packages
+library(cowsay)
+```
+
+
+
+EXAMPLE 1
+Game of Thrones Chord Diagram
+
+```{r}
+got <- read_csv(here("Data/got_battles.csv")) # loading data
+
+attackers <- got %>%
+  select(3, 6:9) %>% # selecting certain columns
+  pivot_longer(cols=c(attacker_1, attacker_2, attacker_3, attacker_4), 
+               names_to="val", values_to="attacker") %>% #rotating data
+  filter(!is.na(attacker)) %>% # removing those that are not attackers
+  select(1, 3)
+
+defenders <- got %>%
+  select(3, 10:13) %>% # selecting certain columns
+  pivot_longer(cols=c(defender_1, defender_2, defender_3, defender_4), 
+               names_to="val", values_to="defender") %>% # rotating data
+  filter(!is.na(defender)) %>%
+  select(1, 3)
+
+battles <- attackers %>%
+  full_join(defenders, by="battle_number") %>%
+  select(2:3) %>%
+  count(attacker, defender) %>%
+  rename("from"="attacker", "to"="defender", "value"="n") %>%
+  filter(!is.na(to)) 
+
+chordDiagram(battles)
+```
+
+
+```{r}
+merged <- battles %>%
+  pivot_longer(cols=c(from, to), names_to="position", values_to="house", names_repair = "unique") %>%
+  count(house) %>%
+  arrange(desc(n)) %>%
+  filter(n > 2)
+
+top_houses <- merged$house
+
+final_houses <- battles %>%
+  filter(from %in% top_houses, to %in% top_houses)
+
+chordDiagram(final_houses)
+```
+
+
+
+EXAMPLE 2.1

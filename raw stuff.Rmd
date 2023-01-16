@@ -1,0 +1,243 @@
+---
+title: "Untitled"
+author: "Ingrid Zoll"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(paletteer)
+library(scales)
+
+gt::info_paletteer(color_pkgs = NULL)
+```
+
+
+```{r}
+library(palmerpenguins)
+library(babynames)
+library(ggfx)
+library(ggpomological)
+library(circlize)
+library(scales)
+library(paletteer)
+library(tvthemes)
+```
+
+---
+  
+  # so what else can you do in R?
+  
+
+  
+  ## back to basics
+```{r}
+myname <- babynames::babynames %>%
+  filter(name %in% c("Ingrid", "Tallulah", "Loraine"), sex == 'F') %>%
+  mutate(name = factor(name, levels = c("Ingrid", "Tallulah", "Loraine")))
+
+name_pal <- c('#58508d', '#bc5090', '#ffa600')
+a <- ggplot(myname, aes(x = year, y = n, color = name))+
+  geom_line()+
+  theme_bw()+
+  scale_color_manual(values = name_pal)
+
+a
+```
+
+---
+  
+  ## neon lines!
+```{r}
+ggplot(myname, aes(x = year, y = n, color = name))+
+  geom_line()+
+  dark_theme_bw()+
+  geom_glowline()+
+  scale_color_manual(values = name_pal)
+```
+
+---
+  
+  ## we can make it ... blurry?
+```{r, echo = T}
+library(ggfx)
+```
+
+```{r}
+with_motion_blur(a, sigma = 3)
+```
+
+---
+  
+  ## not sure why you'd ever need this...
+```{r}
+ggplot() + 
+  as_reference(
+    geom_polygon(aes(c(0, 0, 0), c(0, 0, 0)), colour = NA, fill = 'magenta'), 
+    id = "displace_map"
+  ) +
+  with_displacement(
+    geom_text(aes(0.45, 0.5, label = 'word art?'), size = 35, fontface = 'bold'), 
+    x_map = ch_red("displace_map"), 
+    y_map = ch_blue("displace_map"),
+    x_scale = unit(0.025, 'npc'),
+    id = "text"
+  ) +
+  with_blend(
+    geom_density_2d_filled(aes(rnorm(1e4, 0.5, 0.2), rnorm(1e4, 0.5, 0.2)), 
+                           show.legend = FALSE),
+    bg_layer = "text",
+    blend_type = "in",
+    id = "blended"
+  ) +
+  scale_fill_viridis_d(option = "plasma")+
+  with_shadow("blended", sigma = 3) + 
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1), clip = 'off') + 
+  labs(x = NULL, y = NULL)
+```
+
+---
+  
+  ## moons?
+```{r, echo = T}
+library(gggibbous)
+```
+
+```{r}
+moonphase <- subset(lunardist, !is.na(phase))
+moonphase$percent <- ifelse(
+  moonphase$phase == "new", 0, ifelse(moonphase$phase == "full", 1, 0.5))
+
+ggplot(lunardist, aes(date, distance)) +
+  geom_line(color = "black") +
+  # Plotting the lower layer as a full circle also works in most cases
+  geom_moon(data = moonphase, ratio = 1, size = 5, fill = "black") +
+  geom_moon(
+    data = moonphase, aes(ratio = percent),
+    size = 5, fill = "yellow", right = moonphase$phase == "first quarter"
+  )+
+  theme_minimal()
+```
+
+---
+  
+  ## cats!
+```{r}
+library(ggcats)
+
+ggplot(mtcars) +
+  geom_cat(aes(mpg, wt), cat = "toast", size = 3)
+```
+
+---
+  
+  ## dogs
+```{r}
+library(ggdogs)
+ggplot(mtcars) +
+  geom_dog(aes(mpg, wt), dog = "glasses", size = 5)
+```
+
+---
+  
+  ## ...bernie?
+```{r}
+library(ggbernie)
+
+ggplot(mtcars) +
+  geom_bernie(aes(mpg, wt), bernie = "sitting")
+```
+
+---
+  
+  ## not my code!
+```{r}
+library(Ecdat)
+data(incomeInequality)
+
+library(tidyverse)
+library(ggcats)
+library(gganimate)
+
+
+dat <-
+  incomeInequality %>%
+  select(Year, P99, median) %>%
+  rename(income_median = median,
+         income_99percent = P99) %>%
+  pivot_longer(cols = starts_with("income"),
+               names_to = "income",
+               names_prefix = "income_")
+
+dat$cat <- rep(NA, 132)
+
+dat$cat[which(dat$income == "median")] <- "nyancat"
+dat$cat[which(dat$income == "99percent")] <- rep(c("pop_close", "pop"), 33)
+
+ggplot(dat, aes(x = Year, y = value, group = income, color = income)) +
+  geom_line(size = 2) +
+  geom_cat(aes(cat = cat), size = 5) +
+  xlab("Cats") +
+  ylab("Cats") +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 20),
+        axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  transition_reveal(Year)
+```
+
+---
+
+
+
+
+  
+  ## generative art
+  
+  <img src="images/abstract-1.jpeg" width="600" height="600"/>
+  
+  ---
+  
+  <img src="images/abstract-2.png" width="600" height="600"/>
+  
+  ---
+  
+  <img src="images/gen-1.jpeg" width="600" height="600"/>
+  
+  ---
+  
+  <img src="images/gen-2.jpeg" width="600" height="600"/>
+  
+  ---
+  
+  <img src="images/gen-3.jpeg" width="600" height="600"/>
+  
+  ---
+  
+  ## more inspiration!
+  <img src="images/moon.jpeg" width="400" height="500"/> 
+  [link](https://twitter.com/emilmalta/status/1378397237957570562) here
+
+---
+  
+  [link](https://twitter.com/spcanelon/status/1483254125915746305) here
+
+<img src="https://pbs.twimg.com/media/FJWTOQnXwAEbf41?format=jpg&name=medium" width="500" height="500"/>
+  
+  ---
+  
+  [link](https://twitter.com/ijeamaka_a/status/1482744453714432002) here
+
+<img src="https://pbs.twimg.com/media/FJHUU0-VUAEx6Yt?format=jpg&name=medium" width="500" height="500"/>
+  
+  ---
+  
+  [link](https://twitter.com/ryanahart/status/1482074159815577604) here
+
+<img src="https://pbs.twimg.com/media/FJFh-_PX0AIFH-N?format=jpg&name=medium" width="500" height="500"/>
+  
+  ---
