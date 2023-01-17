@@ -1,0 +1,712 @@
+---
+title: "The Art of Data"
+subtitle: "making fun and pretty graphs in RStudio"  
+author: 
+  - "Ingrid Zoll"
+date: 
+  - "January 17 & 19, 2023"
+output:
+  xaringan::moon_reader:
+    yolo: true
+    css: custom-theme.css
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: solarized-dark
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.width=9, fig.height=3.5, fig.retina=3,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_solarized_light()
+
+library(tidyverse)
+library(here)
+```
+
+## Getting Started
+
+- **Welcome!**
+
+- Who am I?
+
+- Who are you?
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+---
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+- Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
+
+---
+
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+- Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
+
+<img src="https://github.com/zolli22/art_with_data/blob/main/Images/yolo.png?raw=true" alt="yolo" height="300px" />
+
+---
+## Thoughts on Misleading Graphs
+
+> _With great power comes great responsibility_ 
+
+---
+## Some of my inspiration
+
+<iframe width="840" height="472" src="https://www.youtube.com/embed/iqaVe1MCTlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+---
+
+## Visually Pleasing Graphs
+
+```{r, echo = F}
+set.seed(170513)
+n <- 5000
+d <- data.frame(a = rnorm(n))
+d$b <- .4 * (d$a + rnorm(n))
+
+d$pc <- predict(prcomp(~a+b, d))[,1]
+
+d$density <- fields::interp.surface(
+  MASS::kde2d(d$a, d$b), d[,c("a", "b")])
+
+ggplot(d, aes(a, b, color = pc, alpha = 1/density)) +
+  geom_point(shape = 16, size = 5, show.legend = FALSE) +
+  theme_minimal() +
+  scale_color_gradient(low = "#0091ff", high = "#f0650e") +
+  scale_alpha(range = c(.05, .25))
+```
+
+From [@drsimonj](https://drsimonj.svbtle.com/pretty-scatter-plots-with-ggplot2)
+
+---
+## Generative Art
+
+```{r, echo = F}
+seq(from=-10, to=10, by = 0.05) %>%
+expand.grid(x=., y=.) %>%
+ggplot(aes(x=(x+pi*sin(y)), y=(y+pi*sin(x)))) +
+geom_point(alpha=.1, shape=20, size=1, color="black")+
+theme_void()
+```
+
+From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
+---
+## Where to look for inspiration
+
+- Rstudio Twitter
+
+- r/dataisbeautiful
+
+- All around you!
+
+- In the books I brought
+
+
+---
+
+class: inverse center middle
+
+# Let's get to it!
+
+---
+
+## Packages
+
+```{r tidy}
+# all hail the tidyverse!
+library(tidyverse)
+```
+
+All other packages used will be in **FILE NAME HERE**
+
+---
+
+## How do I find cool R packages?
+
+---
+
+## How do I find cool R packages?
+
+- Google it
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+
+- RStudio Twitter
+---
+## Data Resources
+
+- The `datasets` package
+
+- Other data packages such as `palmerpenguins` and `babynames`
+
+- [Kaggle datasets](https://www.kaggle.com/datasets?fileType=csv)
+
+- Generated data
+
+- Your own data
+
+---
+
+## Chart Type Resources
+
+- [The R Graph Gallery](https://r-graph-gallery.com/index.html)
+- [From Data to Viz](https://www.data-to-viz.com/#explore)
+
+---
+## Colors
+
+- Build in color palettes
+
+- Custom color palettes
+
+- Themed packages
+
+
+[The god of all color palette packages:](https://github.com/EmilHvitfeldt/paletteer)
+## **Paletteer**
+
+---
+
+
+
+---
+class: center middle
+
+## Example No. 1
+**Penguins**
+---
+## A basic `palmerpenguins` graph
+
+```{r, echo = F}
+library(palmerpenguins)
+
+penguins <- palmerpenguins::penguins
+
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()
+```
+
+---
+## Adjust `ggplot2` aesthetics
+```{r, echo = F}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  theme_bw()
+```
+
+---
+## Adding Other Effects with `ggdark` and `ggshadow`
+```{r, echo = F}
+library(ggdark)
+library(ggshadow)
+
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_glowpoint()+
+  dark_theme_linedraw()
+```
+
+---
+  
+## Different Neon Effect with `ggfx`
+```{r, echo = F}
+library(ggfx)
+
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g))+
+  dark_theme_linedraw()+
+  with_outer_glow(geom_point(data=filter(penguins, species == 'Adelie'),fill="white"),
+                  colour="dodgerblue", sigma=4, expand=2)+
+  with_outer_glow(geom_point(data=filter(penguins, species == 'Gentoo'),fill="white"),
+                  colour="deeppink", sigma=4, expand=2)+
+  with_outer_glow(geom_point(data=filter(penguins, species == 'Chinstrap'),fill="white"),
+                  colour="yellow", sigma=4, expand=2)
+```
+
+---
+### Do you ever wish you could make a graph harder to read?
+`ggfx`
+
+```{r, echo = F}
+library(ggfx)
+
+pengwing <- ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  theme_bw()
+with_motion_blur(pengwing, sigma =7)
+```
+
+
+---
+  
+## Pre-Designed Themes: `ggpomological`
+```{r, echo = F}
+library(ggpomological)
+
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  scale_color_pomological()+
+  theme_pomological()
+```
+
+---
+## Pre-Designed Themes: `ggpomological`
+```{r, echo = F}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  scale_color_pomological()+
+  theme_pomological("Homemade Apple", 16)
+```
+
+---
+## Pre-Designed Themes: `ggcute`
+```{r, echo = F}
+library(ggcute)
+
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  scale_color_fairyfloss()+
+  theme_fairyfloss()
+```
+
+---
+## Pre-Designed Themes: `ggcute`
+```{r, echo = F}
+ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
+  geom_point()+
+  scale_color_sugarpill()+
+  theme_sugarpill()
+```
+
+---
+class: center middle
+
+## Example No. 2
+**Game of Thrones Battles**
+
+---
+## Chord diagram example with `circlize`
+
+.left-column[
+```{r circle, echo = T}
+library(circlize)
+```
+]
+
+.right-column[
+<img src="https://pltfrmrsrcscdn.sagepub.com/srm/images/chord-diagram-in-routesonline-2019/10.4135_9781529773996-fig7.jpg" alt="Routes chord diagram" height="500px" />
+
+[Chord diagram](https://methods.sagepub.com/dataset/chord-diagram-in-routesonline-2019)
+]
+---
+
+<img src="https://github.com/zolli22/art_with_data/blob/main/Images/chord.gif?raw=true" alt="chord gif" height="575px" />
+
+---
+
+### Data
+
+Game of Thrones battle data from [Kaggle](https://www.kaggle.com/mylesoneill/game-of-thrones?select=battles.csv)
+
+```{r, echo = F}
+got <- read_csv(here("Data/got_battles.csv"))
+
+attackers <- got %>%
+  select(3, 6:9) %>%
+  pivot_longer(cols=c(attacker_1, attacker_2, attacker_3, attacker_4), 
+               names_to="val", values_to="attacker") %>%
+  filter(!is.na(attacker)) %>%
+  select(1, 3)
+
+defenders <- got %>%
+  select(3, 10:13) %>%
+  pivot_longer(cols=c(defender_1, defender_2, defender_3, defender_4), 
+               names_to="val", values_to="defender") %>%
+  filter(!is.na(defender)) %>%
+  select(1, 3)
+
+battles <- attackers %>%
+  full_join(defenders, by="battle_number") %>%
+  select(2:3) %>%
+  count(attacker, defender) %>%
+  rename("from"="attacker", "to"="defender", "value"="n") %>%
+  filter(!is.na(to)) 
+  
+merged <- battles %>%
+  pivot_longer(cols=c(from, to), names_to="position", values_to="house", names_repair = "unique") %>%
+  count(house) %>%
+  arrange(desc(n)) %>%
+  filter(n > 2)
+
+top_houses <- merged$house
+
+final_houses <- battles %>%
+  filter(from %in% top_houses, to %in% top_houses)
+```
+
+```{r}
+head(got)
+```
+---
+
+### Graph attempt 1 
+
+```{r got1, echo = F}
+chordDiagram(battles)
+```
+
+---
+### Graph attempt 2
+
+```{r got2, echo = F}
+chordDiagram(final_houses)
+```
+
+Filtered so both attacking and defending house are involved in 2 or more battles
+
+---
+## Premade Color Palettes
+```{r, echo = F}
+library(scales)
+```
+
+```{r, echo = T}
+library(tvthemes)
+show_col(westeros_pal(palette = "Stark")(6))
+```
+
+---
+## Custom Color Palette
+```{r, echo = F}
+tv_cols <- c("Baratheon" = "#FFD700","Lannister" = "#89080A",
+             "Greyjoy" = "#000000","Stark" = "#174d79",
+             "Mormont" = "#cadde1","Tully" = "#8b5b45", 
+             "Frey" = "#4682b4","Bolton" = "#015202", 
+             "Glover" = "#DCDCDC","Karstark" = "#7b906f")
+show_col(tv_cols)
+```
+
+---
+## Putting it All Together
+```{r, echo = F}
+chordDiagram(final_houses, grid.col = tv_cols)
+```
+
+---
+
+<img src="https://github.com/zolli22/art_with_data/blob/main/Images/got_battle.jpeg?raw=true)" alt="final GOT" height="600px" />          My final version
+
+---
+class: center middle
+
+# More Fun Stuff
+ 
+---
+## Not sure why anyone would need this but it exists
+  
+```{r, echo = F}
+ggplot() + 
+  as_reference(
+    geom_polygon(aes(c(0, 0, 0), c(0, 0, 0)), colour = NA, fill = 'magenta'), 
+    id = "displace_map"
+  ) +
+  with_displacement(
+    geom_text(aes(0.45, 0.5, label = 'word art?'), size = 35, fontface = 'bold'), 
+    x_map = ch_red("displace_map"), 
+    y_map = ch_blue("displace_map"),
+    x_scale = unit(0.025, 'npc'),
+    id = "text"
+  ) +
+  with_blend(
+    geom_density_2d_filled(aes(rnorm(1e4, 0.5, 0.2), rnorm(1e4, 0.5, 0.2)), 
+                           show.legend = FALSE),
+    bg_layer = "text",
+    blend_type = "in",
+    id = "blended"
+  ) +
+  scale_fill_viridis_d(option = "plasma")+
+  with_shadow("blended", sigma = 3) + 
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1), clip = 'off') + 
+  labs(x = NULL, y = NULL)
+```
+---
+
+## Moon Phase Plots with `gggibbous`
+
+```{r, echo = F}
+library(gggibbous)
+
+moonphase <- subset(lunardist, !is.na(phase))
+moonphase$percent <- ifelse(
+  moonphase$phase == "new", 0, ifelse(moonphase$phase == "full", 1, 0.5))
+
+moons <- ggplot(lunardist, aes(date, distance)) +
+  geom_line(color = "black") +
+  # Plotting the lower layer as a full circle also works in most cases
+  geom_moon(data = moonphase, ratio = 1, size = 5, fill = "black") +
+  geom_moon(
+    data = moonphase, aes(ratio = percent),
+    size = 5, fill = "yellow", right = moonphase$phase == "first quarter"
+  )+
+  theme_minimal()
+
+moons
+```
+
+
+---
+## Fun graphing packages: `ggcats`
+
+```{r, echo = F}
+library(ggcats)
+
+ggplot(mtcars) +
+  geom_cat(aes(mpg, wt), cat = "pop", size = 3)+
+  theme_bw()
+```
+
+---
+  
+## Fun graphing packages: `ggdogs`
+
+```{r, echo = F}
+library(ggdogs)
+
+ggplot(mtcars) +
+  geom_dog(aes(mpg, wt), dog = "thisisfine", size = 5)+
+  theme_bw()
+```
+
+---
+  
+## Fun graphing packages: `ggbernie`
+
+```{r, echo = F}
+library(ggbernie)
+
+ggplot(mtcars) +
+  geom_bernie(aes(mpg, wt), bernie = "sitting")+
+  theme_bw()
+```
+
+---
+## Did you know you can animate things?
+
+```{r, echo = F, eval = F}
+library(Ecdat)
+data(incomeInequality)
+
+library(tidyverse)
+library(ggcats)
+library(gganimate)
+
+
+dat <-
+  incomeInequality %>%
+  select(Year, P99, median) %>%
+  rename(income_median = median,
+         income_99percent = P99) %>%
+  pivot_longer(cols = starts_with("income"),
+               names_to = "income",
+               names_prefix = "income_")
+
+dat$cat <- rep(NA, 132)
+
+dat$cat[which(dat$income == "median")] <- "nyancat"
+dat$cat[which(dat$income == "99percent")] <- rep(c("pop_close", "pop"), 33)
+
+ggplot(dat, aes(x = Year, y = value, group = income, color = income)) +
+  geom_line(size = 2) +
+  geom_cat(aes(cat = cat), size = 5) +
+  xlab("Cats?") +
+  ylab("Cats!") +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 20),
+        axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  transition_reveal(Year)+
+  theme_bw()
+```
+
+<img src="https://github.com/zolli22/art_with_data/blob/main/Images/cats.gif?raw=true" alt="catgif" height="550px" />
+
+
+---
+class: inverse center middle
+
+## Other Random Packages
+
+---
+## Package: `cowsay`
+
+```{r, echo = F}
+library(cowsay)
+```
+```{r}
+say('time')
+```
+
+---
+## Package: `cowsay`
+```{r}
+say('fortune', 'smallcat')
+```
+---
+## Package: `cowsay`
+```{r}
+say('hot diggity', 'frog')
+```
+
+---
+## Package: `fun`
+
+- It is possible (though difficult) to play games such as **minesweeper** in R with the package `fun`.
+
+```{r, echo = T, eval = FALSE}
+library(fun)
+
+X11(type = "Xlib")
+mine_sweeper(width = 5, height = 5, mines = 5, cheat = FALSE)
+```
+
+---
+## Package: `fortunes`
+
+```{r, echo = F}
+library(fortunes)
+```
+
+```{r}
+fortune()
+```
+---
+## Package: `praise`
+
+```{r, echo = F}
+library(praise)
+```
+
+```{r}
+praise()
+```
+
+---
+## Dad Jokes
+```{r}
+library(dadjoke)
+```
+
+```{r}
+dadjoke()
+```
+
+---
+## Emo Kid
+```{r}
+library(emokid)
+```
+
+```{r}
+iamsad()
+```
+
+```{r}
+mymood()
+```
+
+---
+class: center, middle
+
+## Remind me to demonstrate the `BRRR` package later in class...
+
+---
+class: center middle
+
+## More Inspiration
+
+---
+
+<img src="https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&name=medium" alt="tweet1" height="575px" />
+
+From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
+
+
+---
+<img src="https://pbs.twimg.com/media/FhExGoGXoAITl4W?format=jpg&name=4096x4096" alt="tweet1" height="575px" />
+
+From [@dickie_roper](https://twitter.com/dickie_roper/status/1590106243225464832/photo/1)
+
+
+---
+class: center middle
+
+We can look through more tweets I have saved, I just don't want to deal with adding them
+all to the slides 
+
+```{r}
+mymood()
+```
+
+---
+## Sources
+
+whoops i didn't finish this
+---
+class: center, middle
+
+# Thank you!
+
+Questions? Contact me at zolli@reed.edu
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)<br>
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
