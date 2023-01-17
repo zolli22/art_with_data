@@ -39,6 +39,10 @@ class: center, middle, inverse, title-slide
 
 - Who are you?
 
+- All code used to create the example charts is in the file `ArtOfData-FollowAlong.Rmd` on my github repo
+
+link: https://github.com/zolli22/art_with_data
+
 ---
 ## Disclaimers:
 
@@ -75,8 +79,16 @@ class: center, middle, inverse, title-slide
 ---
 ## Thoughts on Misleading Graphs
 
-&gt; _With great power comes great responsibility_ 
+.left-column[
+_With great power comes great responsibility_ 
 
+]
+
+.right-column[
+
+&lt;img src="https://static.mathigon.org/cms/24069e6a6f5331a1d975b4eae6f57969.png" alt="bad" height="400px" /&gt;
+
+]
 ---
 ## Some of my inspiration
 
@@ -91,11 +103,49 @@ class: center, middle, inverse, title-slide
 From [@drsimonj](https://drsimonj.svbtle.com/pretty-scatter-plots-with-ggplot2)
 
 ---
+class: center middle
+
+## Can information be beautiful when information doesn't exist?
+
+A [blog post](https://junkcharts.typepad.com/junk_charts/2012/10/can-information-be-beautiful-when-information-doesnt-exist.html) by [Kaiser Fung](https://twitter.com/junkcharts)
+
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017c3286ec04970b-pi)
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017ee42af047970d-pi)
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017ee42ae0a2970d-pi)
+---
+background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
+---
+
 ## Generative Art
 
 &lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
 
 From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
+---
+
+&lt;img src="https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&amp;name=medium" alt="tweet1" height="575px" /&gt;
+
+From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
+
+---
+![](https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&amp;name=medium)
+
+From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
+---
+&lt;img src="https://pbs.twimg.com/media/FhExGoGXoAITl4W?format=jpg&amp;name=4096x4096" alt="tweet1" height="575px" /&gt;
+
+From [@dickie_roper](https://twitter.com/dickie_roper/status/1590106243225464832/photo/1)
+
+
 ---
 ## Where to look for inspiration
 
@@ -103,10 +153,11 @@ From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
 
 - r/dataisbeautiful
 
-- All around you!
-
 - In the books I brought
 
+- All around you!
+
+- This presentation
 
 ---
 
@@ -116,15 +167,7 @@ class: inverse center middle
 
 ---
 
-## Packages
 
-
-```r
-# all hail the tidyverse!
-library(tidyverse)
-```
-
-All other packages used will be in **FILE NAME HERE**
 
 ---
 
@@ -153,12 +196,26 @@ All other packages used will be in **FILE NAME HERE**
 [**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
 
 - RStudio Twitter
+
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+
+- RStudio Twitter
+
+- This presentation!
+
 ---
 ## Data Resources
 
 - The `datasets` package
 
-- Other data packages such as `palmerpenguins` and `babynames`
+- Other data packages such as `palmerpenguins`, `babynames`, `pdxTrees`, or `survivoR`
 
 - [Kaggle datasets](https://www.kaggle.com/datasets?fileType=csv)
 
@@ -171,65 +228,95 @@ All other packages used will be in **FILE NAME HERE**
 ## Chart Type Resources
 
 - [The R Graph Gallery](https://r-graph-gallery.com/index.html)
+
 - [From Data to Viz](https://www.data-to-viz.com/#explore)
 
 ---
 ## Colors
 
-Finish this slide!!!
+- Built-in color palettes 
+
+- Custom color palettes
+
+- Themed packages
+
+---
+class: center middle
+
+[The god of all color palette packages:](https://github.com/EmilHvitfeldt/paletteer)
+
+## **Paletteer**
+
+(palettes can be seen [here](https://github.com/EmilHvitfeldt/r-color-palettes))
+
+---
+## Accessible Color Palettes: `viridis`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+---
+## Themed packages
+
+Pamplemousse LaCroix
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+---
+## Themed packages
+
+PNW Color Palette - Cascades
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
 
 ---
 class: center middle
 
 ## Example No. 1
-**Penguins**
+**Starting with The Data**
 ---
 ## A basic `palmerpenguins` graph
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
 
 ---
 ## Adjust `ggplot2` aesthetics
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 
 ---
 ## Adding Other Effects with `ggdark` and `ggshadow`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
 
 ---
   
 ## Different Neon Effect with `ggfx`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
 
 ---
 ### Do you ever wish you could make a graph harder to read?
 `ggfx`
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
 
 
 ---
   
 ## Pre-Designed Themes: `ggpomological`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
 
 ---
 ## Pre-Designed Themes: `ggpomological`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-12-1.png" width="100%" /&gt;
 
 ---
 ## Pre-Designed Themes: `ggcute`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-13-1.png" width="100%" /&gt;
 
 ---
 ## Pre-Designed Themes: `ggcute`
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-14-1.png" width="100%" /&gt;
 
 ---
 class: center middle
 
 ## Example No. 2
-**Game of Thrones Battles**
+**Starting with the Chart Type**
 
 ---
 ## Chord diagram example with `circlize`
@@ -247,7 +334,7 @@ library(circlize)
 [Chord diagram](https://methods.sagepub.com/dataset/chord-diagram-in-routesonline-2019)
 ]
 ---
-
+class: center middle
 &lt;img src="https://github.com/zolli22/art_with_data/blob/main/Images/chord.gif?raw=true" alt="chord gif" height="575px" /&gt;
 
 ---
@@ -265,21 +352,19 @@ head(got)
 
 ```
 ## # A tibble: 6 × 25
-##   name      year battl…¹ attac…² defen…³ attac…⁴ attac…⁵ attac…⁶ attac…⁷ defen…⁸
-##   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
-## 1 Battle …   298       1 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully  
-## 2 Battle …   298       2 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Barath…
-## 3 Battle …   298       3 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully  
-## 4 Battle …   298       4 Robb S… Joffre… Stark   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Lannis…
-## 5 Battle …   298       5 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis…
-## 6 Battle …   298       6 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis…
-## # … with 15 more variables: defender_2 &lt;chr&gt;, defender_3 &lt;lgl&gt;,
-## #   defender_4 &lt;lgl&gt;, attacker_outcome &lt;chr&gt;, battle_type &lt;chr&gt;,
-## #   major_death &lt;dbl&gt;, major_capture &lt;dbl&gt;, attacker_size &lt;dbl&gt;,
-## #   defender_size &lt;dbl&gt;, attacker_commander &lt;chr&gt;, defender_commander &lt;chr&gt;,
-## #   summer &lt;dbl&gt;, location &lt;chr&gt;, region &lt;chr&gt;, note &lt;chr&gt;, and abbreviated
-## #   variable names ¹​battle_number, ²​attacker_king, ³​defender_king, ⁴​attacker_1,
-## #   ⁵​attacker_2, ⁶​attacker_3, ⁷​attacker_4, ⁸​defender_1
+##   name          year battl…¹ attac…² defen…³ attac…⁴ attac…⁵ attac…⁶ attac…⁷ defen…⁸ defen…⁹ defen…˟
+##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;  
+## 1 Battle of t…   298       1 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully   &lt;NA&gt;    NA     
+## 2 Battle at t…   298       2 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Barath… &lt;NA&gt;    NA     
+## 3 Battle of R…   298       3 Joffre… Robb S… Lannis… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Tully   &lt;NA&gt;    NA     
+## 4 Battle of t…   298       4 Robb S… Joffre… Stark   &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    Lannis… &lt;NA&gt;    NA     
+## 5 Battle of t…   298       5 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis… &lt;NA&gt;    NA     
+## 6 Battle of t…   298       6 Robb S… Joffre… Stark   Tully   &lt;NA&gt;    &lt;NA&gt;    Lannis… &lt;NA&gt;    NA     
+## # … with 13 more variables: defender_4 &lt;lgl&gt;, attacker_outcome &lt;chr&gt;, battle_type &lt;chr&gt;,
+## #   major_death &lt;dbl&gt;, major_capture &lt;dbl&gt;, attacker_size &lt;dbl&gt;, defender_size &lt;dbl&gt;,
+## #   attacker_commander &lt;chr&gt;, defender_commander &lt;chr&gt;, summer &lt;dbl&gt;, location &lt;chr&gt;, region &lt;chr&gt;,
+## #   note &lt;chr&gt;, and abbreviated variable names ¹​battle_number, ²​attacker_king, ³​defender_king,
+## #   ⁴​attacker_1, ⁵​attacker_2, ⁶​attacker_3, ⁷​attacker_4, ⁸​defender_1, ⁹​defender_2, ˟​defender_3
 ```
 ---
 
@@ -296,23 +381,15 @@ Filtered so both attacking and defending house are involved in 2 or more battles
 
 ---
 ## Premade Color Palettes
-
-
-
-```r
-library(tvthemes)
-show_col(westeros_pal(palette = "Stark")(6))
-```
-
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-15-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
 
 ---
 ## Custom Color Palette
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-16-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
 
 ---
 ## Putting it All Together
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
 
 ---
 
@@ -326,30 +403,30 @@ class: center middle
 ---
 ## Not sure why anyone would need this but it exists
   
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
 ---
 
 ## Moon Phase Plots with `gggibbous`
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
 
 
 ---
 ## Fun graphing packages: `ggcats`
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
 
 ---
   
 ## Fun graphing packages: `ggdogs`
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-23-1.png" width="100%" /&gt;
 
 ---
   
 ## Fun graphing packages: `ggbernie`
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-24-1.png" width="100%" /&gt;
 
 ---
 ## Did you know you can animate things?
@@ -369,6 +446,7 @@ class: inverse center middle
 
 
 
+
 ```r
 say('time')
 ```
@@ -376,7 +454,7 @@ say('time')
 ```
 ## 
 ##  -------------- 
-## 2023-01-16 18:25:05 
+## 2023-01-17 12:35:01 
 ##  --------------
 ##     \
 ##       \
@@ -401,14 +479,15 @@ say('time')
 say('fortune', 'smallcat')
 ```
 
+
 ```
 ## 
 ##  -------------- 
-## As the name says, studentizing is left as an easy student exercise. Destudentizing is more difficult and usually called professorizing.
-##  Dieter Menne
-##  in response to a question whether residuals from nls() are studentized
+## Soham: How to compute the p-value of a statistic generally?
+## Berton Gunter: runif(1)
+##  Soham and Berton Gunter
 ##  R-help
-##  April 2009 
+##  May 2010 
 ##  --------------
 ##     \
 ##      \
@@ -417,6 +496,8 @@ say('fortune', 'smallcat')
 ##         ( o.o )
 ##          &gt; ^ &lt;      [nosig]
 ```
+
+
 ---
 ## Package: `cowsay`
 
@@ -456,21 +537,20 @@ mine_sweeper(width = 5, height = 5, mines = 5, cheat = FALSE)
 ---
 ## Package: `fortunes`
 
-
-
-
 ```r
 fortune()
 ```
 
+
 ```
 ## 
-## Sorting is a wonderful topic! Especially because you can discuss different
-## fundamental ideas like brute force, divide and conquer, and questions of
-## efficiency, tradeoffs of space and time, etc.
-##    -- Peter Wolf
-##       R-help (April 2004)
+## Bug, undocumented behaviour, feature? I don't know. It all seems to work
+## in 1.6.0, so everyone should downgrade now... :)
+##    -- Barry Rowlingson
+##       R-help (July 2003)
 ```
+
+
 ---
 ## Package: `praise`
 
@@ -482,11 +562,9 @@ praise()
 ```
 
 ```
-## [1] "You are flawless!"
+## [1] "You are fine!"
 ```
 
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
 ---
 ## Dad Jokes
 
@@ -520,7 +598,7 @@ iamsad()
 ```
 
 ```
-## i don't want to feel this way forever. a dead letter marked return to sender. 😩
+## so bury me in memory, his smile's your rope. so wrap it tight around your throat. 💔
 ```
 
 
@@ -529,7 +607,7 @@ mymood()
 ```
 
 ```
-## 😿
+## 😭
 ```
 
 ---
@@ -538,14 +616,15 @@ class: center, middle
 ## Remind me to demonstrate the `BRRR` package later in class...
 
 ---
-## More Inspiration
+## What next?
 
-&lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;Some baby flow fields for this gloomy Tuesday.&lt;br&gt;&lt;br&gt;Embroidery 09 - 20221102_917 for my generative art in R to physical art using embroidery project.&lt;a href="https://twitter.com/hashtag/generativeart?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#generativeart&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/rtistry?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rtistry&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/embroidery?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#embroidery&lt;/a&gt; &lt;a href="https://t.co/HBtUtfpfjM"&gt;pic.twitter.com/HBtUtfpfjM&lt;/a&gt;&lt;/p&gt;&amp;mdash; Ijeamaka (@ijeamaka_a) &lt;a href="https://twitter.com/ijeamaka_a/status/1590039056196734977?ref_src=twsrc%5Etfw"&gt;November 8, 2022&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+- Work time?
 
----
-## Sources
+- Fonts?
 
-whoops i need to finish this later
+- Lego graphs?
+
+- More inspiration/examples?
 ---
 class: center, middle
 

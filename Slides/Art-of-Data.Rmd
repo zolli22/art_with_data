@@ -15,7 +15,7 @@ output:
       highlightLines: true
       ratio: 16:9
       countIncrementalSlides: true
-      
+  white-space: pre-wrap      
 ---
 
 ```{r setup, include=FALSE}
@@ -29,6 +29,8 @@ knitr::opts_chunk$set(
   warning = FALSE,
   hiline = TRUE
 )
+
+options(width = 100)
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -46,6 +48,10 @@ library(here)
 - Who am I?
 
 - Who are you?
+
+- All code used to create the example charts is in the file `ArtOfData-FollowAlong.Rmd` on my github repo
+
+link: https://github.com/zolli22/art_with_data
 
 ---
 ## Disclaimers:
@@ -83,7 +89,7 @@ library(here)
 ---
 ## Thoughts on Misleading Graphs
 
-> _With great power comes great responsibility_ 
+<img src="https://static.mathigon.org/cms/24069e6a6f5331a1d975b4eae6f57969.png" alt="bad graph" height="550px" />
 
 ---
 ## Some of my inspiration
@@ -117,17 +123,49 @@ set.seed(NULL)
 From [@drsimonj](https://drsimonj.svbtle.com/pretty-scatter-plots-with-ggplot2)
 
 ---
+class: center middle
+
+## Can information be beautiful when information doesn't exist?
+
+A [blog post](https://junkcharts.typepad.com/junk_charts/2012/10/can-information-be-beautiful-when-information-doesnt-exist.html) by [Kaiser Fung](https://twitter.com/junkcharts)
+
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017c3286ec04970b-pi)
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017ee42af047970d-pi)
+---
+class: center middle
+
+![](https://junkcharts.typepad.com/.a/6a00d8341e992c53ef017ee42ae0a2970d-pi)
+---
+
 ## Generative Art
 
 ```{r, echo = F}
 seq(from=-10, to=10, by = 0.05) %>%
-expand.grid(x=., y=.) %>%
-ggplot(aes(x=(x+pi*sin(y)), y=(y+pi*sin(x)))) +
-geom_point(alpha=.1, shape=20, size=1, color="black")+
-theme_void()
+  expand.grid(x=., y=.) %>%
+  ggplot(aes(x=(x+pi*sin(y)), y=(y+pi*sin(x)))) +
+    geom_point(alpha=.1, shape=20, size=1, color="black")+
+    theme_void()
 ```
 
 From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
+---
+
+<img src="https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&name=medium" alt="tweet1" height="575px" />
+
+From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
+
+---
+<img src="https://pbs.twimg.com/media/FhExGoGXoAITl4W?format=jpg&name=4096x4096" alt="tweet1" height="575px" />
+
+From [@dickie_roper](https://twitter.com/dickie_roper/status/1590106243225464832/photo/1)
+
+
 ---
 ## Where to look for inspiration
 
@@ -135,27 +173,17 @@ From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
 
 - r/dataisbeautiful
 
-- All around you!
-
 - In the books I brought
 
+- All around you!
+
+- This presentation
 
 ---
 
 class: inverse center middle
 
 # Let's get to it!
-
----
-
-## Packages
-
-```{r tidy}
-# all hail the tidyverse!
-library(tidyverse)
-```
-
-All other packages used will be in **FILE NAME HERE**
 
 ---
 
@@ -184,12 +212,26 @@ All other packages used will be in **FILE NAME HERE**
 [**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
 
 - RStudio Twitter
+
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+
+- RStudio Twitter
+
+- This presentation!
+
 ---
 ## Data Resources
 
 - The `datasets` package
 
-- Other data packages such as `palmerpenguins` and `babynames`
+- Other data packages such as `palmerpenguins`, `babynames`, `pdxTrees`, or `survivoR`
 
 - [Kaggle datasets](https://www.kaggle.com/datasets?fileType=csv)
 
@@ -202,30 +244,63 @@ All other packages used will be in **FILE NAME HERE**
 ## Chart Type Resources
 
 - [The R Graph Gallery](https://r-graph-gallery.com/index.html)
+
 - [From Data to Viz](https://www.data-to-viz.com/#explore)
 
 ---
 ## Colors
 
-- Build in color palettes
+- Built-in color palettes 
 
 - Custom color palettes
 
 - Themed packages
 
+---
+class: center middle
 
 [The god of all color palette packages:](https://github.com/EmilHvitfeldt/paletteer)
+
 ## **Paletteer**
 
+(palettes can be seen [here](https://github.com/EmilHvitfeldt/r-color-palettes))
+
 ---
+### Accessible Color Palettes: `viridis`
+```{r, echo = F}
+library(scales)
+library(viridis)
 
+show_col(viridis_pal()(12), labels = F)
+```
 
+---
+### Themed packages
+
+LaCroixColoR: Pamplemousse
+```{r, echo = F}
+library(paletteer)
+library(LaCroixColoR)
+
+show_col(paletteer_d('LaCroixColoR::Pamplemousse'), labels = F)
+```
+
+---
+### Themed packages
+
+PNWColors: Cascades
+```{r, echo = F}
+library(paletteer)
+library(PNWColors)
+
+show_col(paletteer_d('PNWColors::Cascades'), labels = F)
+```
 
 ---
 class: center middle
 
 ## Example No. 1
-**Penguins**
+**Starting with The Data**
 ---
 ## A basic `palmerpenguins` graph
 
@@ -292,6 +367,9 @@ with_motion_blur(pengwing, sigma =7)
 ## Pre-Designed Themes: `ggpomological`
 ```{r, echo = F}
 library(ggpomological)
+library(sysfonts)
+
+font_add_google("Homemade Apple")
 
 ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
   geom_point()+
@@ -302,6 +380,10 @@ ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
 ---
 ## Pre-Designed Themes: `ggpomological`
 ```{r, echo = F}
+library(sysfonts)
+
+font_add_google("Homemade Apple")
+
 ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
   geom_point()+
   scale_color_pomological()+
@@ -332,7 +414,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g, color = species))+
 class: center middle
 
 ## Example No. 2
-**Game of Thrones Battles**
+**Starting with the Chart Type**
 
 ---
 ## Chord diagram example with `circlize`
@@ -349,7 +431,7 @@ library(circlize)
 [Chord diagram](https://methods.sagepub.com/dataset/chord-diagram-in-routesonline-2019)
 ]
 ---
-
+class: center middle
 <img src="https://github.com/zolli22/art_with_data/blob/main/Images/chord.gif?raw=true" alt="chord gif" height="575px" />
 
 ---
@@ -418,11 +500,8 @@ Filtered so both attacking and defending house are involved in 2 or more battles
 ## Premade Color Palettes
 ```{r, echo = F}
 library(scales)
-```
-
-```{r, echo = T}
 library(tvthemes)
-show_col(westeros_pal(palette = "Stark")(6))
+show_col(westeros_pal(palette = "Stark")(6), labels = F)
 ```
 
 ---
@@ -433,7 +512,7 @@ tv_cols <- c("Baratheon" = "#FFD700","Lannister" = "#89080A",
              "Mormont" = "#cadde1","Tully" = "#8b5b45", 
              "Frey" = "#4682b4","Bolton" = "#015202", 
              "Glover" = "#DCDCDC","Karstark" = "#7b906f")
-show_col(tv_cols)
+show_col(tv_cols, labels = F)
 ```
 
 ---
@@ -524,6 +603,7 @@ library(ggdogs)
 
 ggplot(mtcars) +
   geom_dog(aes(mpg, wt), dog = "thisisfine", size = 5)+
+  theme(aspect.ratio = 1)+
   theme_bw()
 ```
 
@@ -592,15 +672,23 @@ class: inverse center middle
 ```{r, echo = F}
 library(cowsay)
 ```
+
 ```{r}
 say('time')
 ```
 
 ---
 ## Package: `cowsay`
-```{r}
+```{r, eval = F}
 say('fortune', 'smallcat')
 ```
+
+```{r, echo = F}
+options(width = 75)
+say('fortune', 'smallcat')
+```
+
+
 ---
 ## Package: `cowsay`
 ```{r}
@@ -621,14 +709,18 @@ mine_sweeper(width = 5, height = 5, mines = 5, cheat = FALSE)
 
 ---
 ## Package: `fortunes`
+```{r, eval = F}
+fortune()
+```
 
 ```{r, echo = F}
 library(fortunes)
+options(width = 75)
+fortune()
+options(width = 75)
 ```
 
-```{r}
-fortune()
-```
+
 ---
 ## Package: `praise`
 
@@ -656,7 +748,7 @@ dadjoke()
 library(emokid)
 ```
 
-```{r}
+```{r, out.width = "50%"}
 iamsad()
 ```
 
@@ -670,37 +762,15 @@ class: center, middle
 ## Remind me to demonstrate the `BRRR` package later in class...
 
 ---
-class: center middle
+## What next?
 
-## More Inspiration
+- Work time?
 
----
+- Fonts?
 
-<img src="https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&name=medium" alt="tweet1" height="575px" />
+- Lego graphs?
 
-From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
-
-
----
-<img src="https://pbs.twimg.com/media/FhExGoGXoAITl4W?format=jpg&name=4096x4096" alt="tweet1" height="575px" />
-
-From [@dickie_roper](https://twitter.com/dickie_roper/status/1590106243225464832/photo/1)
-
-
----
-class: center middle
-
-We can look through more tweets I have saved, I just don't want to deal with adding them
-all to the slides 
-
-```{r}
-mymood()
-```
-
----
-## Sources
-
-whoops i didn't finish this
+- More inspiration/examples?
 ---
 class: center, middle
 
