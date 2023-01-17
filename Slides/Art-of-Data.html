@@ -31,7 +31,6 @@ class: center, middle, inverse, title-slide
 
 
 
-name: intro
 ## Getting Started
 
 - **Welcome!**
@@ -62,6 +61,18 @@ name: intro
 - Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
 
 ---
+
+## Disclaimers:
+
+- Many of the graphs shown today **will not** be informative or helpful.
+
+- This class **will not** teach you how to make informative and helpful graphs.
+
+- Hopefully, this class **will** teach you how to make fun and/or visually pleasing graphs.
+
+&lt;img src="https://github.com/zolli22/art_with_data/blob/main/Images/yolo.png?raw=true" alt="yolo" height="300px" /&gt;
+
+---
 ## Thoughts on Misleading Graphs
 
 &gt; _With great power comes great responsibility_ 
@@ -73,15 +84,35 @@ name: intro
 
 ---
 
-&lt;img src="https://i.redd.it/j6e6aajstfba1.png" alt="Tarantino's Cinematic Network" height="575px" /&gt;
+## Visually Pleasing Graphs
 
-[Tarantino's Cinematic Network of Actors](https://www.reddit.com/r/dataisbeautiful/comments/1098bth/oc_tarantinos_cinematic_network_of_actors/)
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-1-1.png" width="100%" /&gt;
 
---- 
+From [@drsimonj](https://drsimonj.svbtle.com/pretty-scatter-plots-with-ggplot2)
+
+---
+## Generative Art
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+
+From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
+---
+## Where to look for inspiration
+
+- Rstudio Twitter
+
+- r/dataisbeautiful
+
+- All around you!
+
+- In the books I brought
+
+
+---
+
 class: inverse center middle
 
-# But that's not why we are here today...
-So let's get to it!
+# Let's get to it!
 
 ---
 
@@ -93,13 +124,47 @@ So let's get to it!
 library(tidyverse)
 ```
 
+All other packages used will be in **FILE NAME HERE**
+
+---
+
 ## How do I find cool R packages?
 
 ---
-class: center middle
 
+## How do I find cool R packages?
 
-## google it
+- Google it
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+---
+
+## How do I find cool R packages?
+
+- Google it 
+
+- Curated lists like [**Awesome R**](https://github.com/qinwf/awesome-R) and 
+[**Awesome R for Dataviz**](https://krzjoa.github.io/awesome-r-dataviz/#/)
+
+- RStudio Twitter
+---
+## Data Resources
+
+- The `datasets` package
+
+- Other data packages such as `palmerpenguins` and `babynames`
+
+- [Kaggle datasets](https://www.kaggle.com/datasets?fileType=csv)
+
+- Generated data
+
+- Your own data
 
 ---
 
@@ -111,9 +176,63 @@ class: center middle
 ---
 ## Colors
 
----
+Finish this slide!!!
 
-## Chord diagram example
+---
+class: center middle
+
+## Example No. 1
+**Penguins**
+---
+## A basic `palmerpenguins` graph
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+---
+## Adjust `ggplot2` aesthetics
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+---
+## Adding Other Effects with `ggdark` and `ggshadow`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+
+---
+  
+## Different Neon Effect with `ggfx`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+
+---
+### Do you ever wish you could make a graph harder to read?
+`ggfx`
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+
+
+---
+  
+## Pre-Designed Themes: `ggpomological`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+
+---
+## Pre-Designed Themes: `ggpomological`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+
+---
+## Pre-Designed Themes: `ggcute`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+
+---
+## Pre-Designed Themes: `ggcute`
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
+
+---
+class: center middle
+
+## Example No. 2
+**Game of Thrones Battles**
+
+---
+## Chord diagram example with `circlize`
 
 .left-column[
 
@@ -129,15 +248,9 @@ library(circlize)
 ]
 ---
 
-&lt;img src="~/Desktop/my brain is noisy/Paideia 2023/Images/chord.gif" alt="Tarantino's Cinematic Network" height="575px" /&gt;
-
-
-&lt;img src="../Images/chord.gif" width="100%" /&gt;
-
-
+&lt;img src="https://github.com/zolli22/art_with_data/blob/main/Images/chord.gif?raw=true" alt="chord gif" height="575px" /&gt;
 
 ---
-
 
 ### Data
 
@@ -172,29 +285,17 @@ head(got)
 
 ### Graph attempt 1 
 
-
-```r
-chordDiagram(battles)
-```
-
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/got1-1.png" width="100%" /&gt;
 
 ---
-
 ### Graph attempt 2
 
-
-```r
-chordDiagram(final_houses)
-```
-
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/got2-1.png" width="100%" /&gt;
 
 Filtered so both attacking and defending house are involved in 2 or more battles
 
 ---
-
-## Colors
+## Premade Color Palettes
 
 
 
@@ -203,27 +304,249 @@ library(tvthemes)
 show_col(westeros_pal(palette = "Stark")(6))
 ```
 
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-15-1.png" width="100%" /&gt;
+
+---
+## Custom Color Palette
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-16-1.png" width="100%" /&gt;
+
+---
+## Putting it All Together
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-17-1.png" width="100%" /&gt;
 
 ---
 
-## custom color palette
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+&lt;img src="https://github.com/zolli22/art_with_data/blob/main/Images/got_battle.jpeg?raw=true)" alt="final GOT" height="600px" /&gt;          My final version
 
 ---
+class: center middle
 
-## all together now!
-&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
-
+# More Fun Stuff
+ 
+---
+## Not sure why anyone would need this but it exists
+  
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-18-1.png" width="100%" /&gt;
 ---
 
-## game of thrones battles
+## Moon Phase Plots with `gggibbous`
 
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-19-1.png" width="100%" /&gt;
 
-&lt;img src="../Images/got_battle.jpeg" width="100%" /&gt;
 
 ---
+## Fun graphing packages: `ggcats`
 
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-20-1.png" width="100%" /&gt;
+
+---
+  
+## Fun graphing packages: `ggdogs`
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-21-1.png" width="100%" /&gt;
+
+---
+  
+## Fun graphing packages: `ggbernie`
+
+&lt;img src="Art-of-Data_files/figure-html/unnamed-chunk-22-1.png" width="100%" /&gt;
+
+---
+## Did you know you can animate things?
+
+
+
+&lt;img src="https://github.com/zolli22/art_with_data/blob/main/Images/cats.gif?raw=true" alt="catgif" height="550px" /&gt;
+
+
+---
+class: inverse center middle
+
+## Other Random Packages
+
+---
+## Package: `cowsay`
+
+
+
+```r
+say('time')
+```
+
+```
+## 
+##  -------------- 
+## 2023-01-16 18:25:05 
+##  --------------
+##     \
+##       \
+##         \
+##             |\___/|
+##           ==) ^Y^ (==
+##             \  ^  /
+##              )=*=(
+##             /     \
+##             |     |
+##            /| | | |\
+##            \| | |_|/\
+##       jgs  //_// ___/
+##                \_)
+## 
+```
+
+---
+## Package: `cowsay`
+
+```r
+say('fortune', 'smallcat')
+```
+
+```
+## 
+##  -------------- 
+## As the name says, studentizing is left as an easy student exercise. Destudentizing is more difficult and usually called professorizing.
+##  Dieter Menne
+##  in response to a question whether residuals from nls() are studentized
+##  R-help
+##  April 2009 
+##  --------------
+##     \
+##      \
+##       \
+##          /\_/\
+##         ( o.o )
+##          &gt; ^ &lt;      [nosig]
+```
+---
+## Package: `cowsay`
+
+```r
+say('hot diggity', 'frog')
+```
+
+```
+## 
+##  ----- 
+## hot diggity 
+##  ------ 
+##     \   
+##      \
+##         (.)_(.)
+##      _ (   _   ) _
+##     / \/`-----'\/ \
+##   __\ ( (     ) ) /__
+##   )   /\ \._./ /\   (
+##    )_/ /|\   /|\ \_(  [nosig]
+## 
+```
+
+---
+## Package: `fun`
+
+- It is possible (though difficult) to play games such as **minesweeper** in R with the package `fun`.
+
+
+```r
+library(fun)
+
+X11(type = "Xlib")
+mine_sweeper(width = 5, height = 5, mines = 5, cheat = FALSE)
+```
+
+---
+## Package: `fortunes`
+
+
+
+
+```r
+fortune()
+```
+
+```
+## 
+## Sorting is a wonderful topic! Especially because you can discuss different
+## fundamental ideas like brute force, divide and conquer, and questions of
+## efficiency, tradeoffs of space and time, etc.
+##    -- Peter Wolf
+##       R-help (April 2004)
+```
+---
+## Package: `praise`
+
+
+
+
+```r
+praise()
+```
+
+```
+## [1] "You are flawless!"
+```
+
+---
+background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
+---
+## Dad Jokes
+
+```r
+library(dadjoke)
+```
+
+
+```r
+dadjoke()
+```
+
+```
+## 
+## 
+## Sometimes I tuck my knees into my chest and lean forward.
+## 
+## That's just how I roll.
+```
+
+---
+## Emo Kid
+
+```r
+library(emokid)
+```
+
+
+```r
+iamsad()
+```
+
+```
+## i don't want to feel this way forever. a dead letter marked return to sender. 😩
+```
+
+
+```r
+mymood()
+```
+
+```
+## 😿
+```
+
+---
+class: center, middle
+
+## Remind me to demonstrate the `BRRR` package later in class...
+
+---
+## More Inspiration
+
+&lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;Some baby flow fields for this gloomy Tuesday.&lt;br&gt;&lt;br&gt;Embroidery 09 - 20221102_917 for my generative art in R to physical art using embroidery project.&lt;a href="https://twitter.com/hashtag/generativeart?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#generativeart&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/rtistry?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#rtistry&lt;/a&gt; &lt;a href="https://twitter.com/hashtag/embroidery?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#embroidery&lt;/a&gt; &lt;a href="https://t.co/HBtUtfpfjM"&gt;pic.twitter.com/HBtUtfpfjM&lt;/a&gt;&lt;/p&gt;&amp;mdash; Ijeamaka (@ijeamaka_a) &lt;a href="https://twitter.com/ijeamaka_a/status/1590039056196734977?ref_src=twsrc%5Etfw"&gt;November 8, 2022&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+---
+## Sources
+
+whoops i need to finish this later
+---
 class: center, middle
 
 # Thank you!
@@ -234,7 +557,6 @@ Slides created via the R packages:
 
 [**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
 [gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
