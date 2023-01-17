@@ -44,6 +44,10 @@ html {
   font-size: var(--base-font-size);
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 body {
   font-family: var(--text-font-family), var(--text-font-family-fallback), var(--text-font-base);
   font-weight: normal;

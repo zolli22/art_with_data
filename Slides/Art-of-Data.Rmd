@@ -15,7 +15,6 @@ output:
       highlightLines: true
       ratio: 16:9
       countIncrementalSlides: true
-  white-space: pre-wrap      
 ---
 
 ```{r setup, include=FALSE}
@@ -87,9 +86,12 @@ link: https://github.com/zolli22/art_with_data
 <img src="https://github.com/zolli22/art_with_data/blob/main/Images/yolo.png?raw=true" alt="yolo" height="300px" />
 
 ---
+class: center middle
+
+
 ## Thoughts on Misleading Graphs
 
-<img src="https://static.mathigon.org/cms/24069e6a6f5331a1d975b4eae6f57969.png" alt="bad graph" height="550px" />
+<img src="https://static.mathigon.org/cms/24069e6a6f5331a1d975b4eae6f57969.png" alt="bad graph" height="510px" />
 
 ---
 ## Some of my inspiration
@@ -97,7 +99,6 @@ link: https://github.com/zolli22/art_with_data
 <iframe width="840" height="472" src="https://www.youtube.com/embed/iqaVe1MCTlA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ---
-
 ## Visually Pleasing Graphs
 
 ```{r, echo = F}
@@ -155,16 +156,18 @@ seq(from=-10, to=10, by = 0.05) %>%
 
 From [@aschinchon](https://twitter.com/aschinchon/status/1614707026415820800)
 ---
+class: center middle
 
 <img src="https://pbs.twimg.com/media/FfdLKXBUUAAw6hx?format=jpg&name=medium" alt="tweet1" height="575px" />
 
 From [@ijeamaka_a](https://twitter.com/ijeamaka_a/status/1582816439420928001)
 
 ---
+class: center middle
+
 <img src="https://pbs.twimg.com/media/FhExGoGXoAITl4W?format=jpg&name=4096x4096" alt="tweet1" height="575px" />
 
 From [@dickie_roper](https://twitter.com/dickie_roper/status/1590106243225464832/photo/1)
-
 
 ---
 ## Where to look for inspiration
@@ -255,6 +258,8 @@ class: inverse center middle
 - Custom color palettes
 
 - Themed packages
+
+- Generated palettes! (colormind.io - we can go over this later if anyone is interested)
 
 ---
 class: center middle
@@ -674,20 +679,14 @@ library(cowsay)
 ```
 
 ```{r}
-say('time')
+say('catfact', 'cat')
 ```
 
 ---
 ## Package: `cowsay`
-```{r, eval = F}
-say('fortune', 'smallcat')
+```{r}
+say('time', 'smallcat')
 ```
-
-```{r, echo = F}
-options(width = 75)
-say('fortune', 'smallcat')
-```
-
 
 ---
 ## Package: `cowsay`
@@ -709,17 +708,13 @@ mine_sweeper(width = 5, height = 5, mines = 5, cheat = FALSE)
 
 ---
 ## Package: `fortunes`
-```{r, eval = F}
-fortune()
-```
-
 ```{r, echo = F}
 library(fortunes)
-options(width = 75)
-fortune()
-options(width = 75)
 ```
 
+```{r}
+fortune()
+```
 
 ---
 ## Package: `praise`
@@ -748,7 +743,7 @@ dadjoke()
 library(emokid)
 ```
 
-```{r, out.width = "50%"}
+```{r}
 iamsad()
 ```
 
@@ -757,9 +752,9 @@ mymood()
 ```
 
 ---
-class: center, middle
+## `BRRR`
 
-## Remind me to demonstrate the `BRRR` package later in class...
+<img src="https://github.com/zolli22/art_with_data/blob/main/Images/brrr.png?raw=true" alt="brrr" height="550px" />
 
 ---
 ## What next?
