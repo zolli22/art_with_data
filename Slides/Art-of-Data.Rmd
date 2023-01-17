@@ -110,6 +110,8 @@ ggplot(d, aes(a, b, color = pc, alpha = 1/density)) +
   theme_minimal() +
   scale_color_gradient(low = "#0091ff", high = "#f0650e") +
   scale_alpha(range = c(.05, .25))
+
+set.seed(NULL)
 ```
 
 From [@drsimonj](https://drsimonj.svbtle.com/pretty-scatter-plots-with-ggplot2)
